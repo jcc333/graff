@@ -1,0 +1,12 @@
+﻿<Properties MonoDevelop.MonoMac.LastXamMacNagTime="9/13/2014 7:20:40 PM">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="graff/AppDelegate.fs">
+    <Files>
+      <File FileName="graff/AppDelegate.fs" Line="18" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
