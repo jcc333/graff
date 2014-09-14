@@ -1,15 +1,18 @@
-﻿namespace graff.primitives.graph
+﻿namespace graff.primitives
 
 open System
 open System.Collections
 
-type Id = int64
+type Id = Guid
 
 type PropertySet = Map<string, string>
 
 type Node = 
-  { label : Id
-    properties : PropertySet }
+  struct 
+    val label : Id
+    val properties : PropertySet
+    new(l : Id, p : PropertySet) = {label = l; properties = p}
+  end
 
 type Edge = 
   interface
@@ -17,7 +20,7 @@ type Edge =
     abstract nodes : Node * Node
   end
 
-type SimpleEdge = 
+type SimpleEdge =
   { label : Id
     nodes : Node * Node
     properties : PropertySet }
@@ -40,4 +43,17 @@ type Entry =
     abstract edges : Edge list
   end
 
-type Graph = Map<Node, Entry>
+type Graph =
+  struct
+    val entries : Map<Id, Entry>
+    new(m : Map<Id, Entry>) = { entries = m }
+    member this.add e : Graph = Graph(this.entries.Add(System.Guid.NewGuid(), e))
+    member this.remove id : Graph = Graph(this.entries.Remove(id))
+    member this.addSeveral (es : Entry list) : Graph = 
+      match es with
+      | [] -> this
+      | h :: t -> (this.add h).addSeveral t
+    member this.filter (p : Entry -> bool) : Graph =
+      let mp = fun id e -> p e
+      Graph(Map.filter mp this.entries)
+  end 
